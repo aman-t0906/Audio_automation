@@ -41,6 +41,7 @@ def test_audio_device_mock():
 def test_snr():
     result = "Pass"
     assert result.lower() == "pass"
+    print("SNR 2")
 
 # JSON
 #   ↓
