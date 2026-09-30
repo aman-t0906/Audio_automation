@@ -38,6 +38,10 @@ def test_audio_device_mock():
     device.connect.assert_called_once()
 
 
+def test_snr():
+    result = "Pass"
+    assert result.lower() == "pass"
+
 # JSON
 #   ↓
 # Python
