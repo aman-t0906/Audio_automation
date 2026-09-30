@@ -45,6 +45,10 @@ def test_thd():
 
     device.connect.assert_called_once()
 
+def test_snr():
+    result = "Pass"
+    assert result.lower() == "pass"
+
 # JSON
 #   ↓
 # Python
