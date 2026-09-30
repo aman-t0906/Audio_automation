@@ -37,6 +37,13 @@ def test_audio_device_mock():
     assert result == "PASS"
     device.connect.assert_called_once()
 
+def test_thd():
+    device = Mock()
+    device.connect.return_value = "PASS"
+    thd = Mock.calculate_thd()
+    assert thd<1
+
+    device.connect.assert_called_once()
 
 # JSON
 #   ↓
