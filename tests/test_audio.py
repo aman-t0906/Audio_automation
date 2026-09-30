@@ -13,8 +13,8 @@ def test_audio_signal(audio_device, data):
     frequency = data["frequency"]
     amplitude = data["amplitude"]
     expected_result = data["expected"]
-    result = audio_device.generate_signal(frequency, amplitude)
-    assert result == expected_result
+    result = audio_device.generate_signal(frequency, amplitude) # Generate Signal through signal generator
+    assert result == expected_result # compare expected and actual results
 
 
 @pytest.mark.smoke
