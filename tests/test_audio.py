@@ -45,9 +45,9 @@ def test_thd():
 
     device.connect.assert_called_once()
 
-def test_snr():
-    result = "Pass"
-    assert result.lower() == "pass"
+def test_SNR():
+    RESULT = "Pass"
+    assert RESULT.lower() == "pass"
 
 # JSON
 #   ↓
