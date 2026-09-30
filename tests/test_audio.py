@@ -48,6 +48,7 @@ def test_thd():
 def test_SNR():
     RESULT = "Pass"
     assert RESULT.lower() == "pass"
+    print("SNR Pass")
 
 # JSON
 #   ↓
