@@ -31,9 +31,9 @@ def test_device_connection_failures():
 
 
 def test_audio_device_mock():
-    device = Mock()
+    device = Mock() # just mock class
     device.connect.return_value = "PASS"
-    result = device.connect()
+    result = device.connect() # it connect device
     assert result == "PASS"
     device.connect.assert_called_once()
 
