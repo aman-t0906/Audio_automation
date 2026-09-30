@@ -1,0 +1,22 @@
+{
+    "audio_tests": [
+        {
+            "name": "1 kHz signal",
+            "frequency": 1000,
+            "amplitude": 1.0,
+            "expected": "PASS"
+        },
+        {
+            "name": "5 kHz signal",
+            "frequency": 5000,
+            "amplitude": 1.0,
+            "expected": "PASS"
+        },
+        {
+            "name": "10 kHz signal",
+            "frequency": 10000,
+            "amplitude": 0.5,
+            "expected": "PASS"
+        }
+    ]
+}
