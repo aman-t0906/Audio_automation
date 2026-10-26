@@ -1,50 +1,59 @@
-import pytest
-from Utils.audio_utils import AudioDevice
-from Utils.logger import get_logger
 
+import pytest
+from drivers.audio_driver import AudioDriver
+from Utils.logger import get_logger
+from Utils.config_reader import load_config
+config = load_config()
 logger = get_logger("Fixture")
 
-"""
-| Scope      | Runs                       |
-| ---------- | -------------------------- |
-| `function` | Once per test              |
-| `class`    | Once per test class        |
-| `module`   | Once per `.py` test file   |
-| `session`  | Once for entire Pytest run |
-
-"""
 
 
 @pytest.fixture(scope="module")
 def test_environment():
-    logger.info("creating test env")
+    logger.info("Creating test environment")
+
     return {
-        "device_name": "Test Audio Device",
-        "connection": "USB"
+        "device_name": config["device"]["name"],
+        "connection": config["device"]["connection"]
     }
 
 
 @pytest.fixture(scope="module")
 def test_config(test_environment):
-    logger.info(f"creating test config for {test_environment['device_name']}")
+    logger.info(
+        f"Creating test config for {test_environment['device_name']}"
+    )
+
     return {
-        "volume": 50,
-        "sample_rate": 48000,
+        "volume": config["audio"]["volume"],
+        "sample_rate": config["audio"]["sample_rate"],
         "device": test_environment["device_name"]
     }
 
 
-@pytest.fixture(scope="module")# we can say one setup and one teardown
+@pytest.fixture(scope="module")
 def audio_device(test_config):
-
     logger.info("Setting up audio device")
-    device = AudioDevice("Test_Amplifier")
+
+    device = AudioDriver(test_config["device"])
     device.set_volume(test_config["volume"])
-    logger.info("\nSetting up audio device...")
     device.connect()
 
     yield device
 
-    logger.info("\nTearing down audio device...")
+    logger.info("Tearing down audio device")
     device.disconnect()
 
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+
+    if report.when == "call":
+        if report.passed:
+            logger.info(f"TEST PASSED: {item.name}")
+        elif report.failed:
+            logger.error(f"TEST FAILED: {item.name}")
+        elif report.skipped:
+            logger.warning(f"TEST SKIPPED: {item.name}")

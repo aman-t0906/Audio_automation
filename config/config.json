@@ -1,0 +1,10 @@
+{
+    "device": {
+        "name": "Test_Amplifier",
+        "connection": "USB"
+    },
+    "audio": {
+        "volume": 50,
+        "sample_rate": 48000
+    }
+}
