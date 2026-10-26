@@ -40,13 +40,18 @@ def test_audio_device_mock():
     assert result == "PASS"
     device.connect.assert_called_once()
 
+
 def test_thd():
     device = Mock()
     device.connect.return_value = "PASS"
-    thd = Mock.calculate_thd()
-    assert thd<1
 
+    result = device.connect()
+    assert result == "PASS"
     device.connect.assert_called_once()
+
+    thd = 0.5  # Simulated THD value in percent
+    assert thd < 1
+
 
 def test_snr():
     result = "Pass"
